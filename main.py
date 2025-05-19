@@ -11,7 +11,11 @@ import re
 import time
 import soundfile as sf
 import whisper
-# from whispercpp import Whisper # use whispercpp if working with limited VRAM
+'''
+use whispercpp if working with limited VRAM
+pip install whispercpp
+from whispercpp import Whisper
+'''
 
 from transformers import MarianMTModel, MarianTokenizer
 from espnet2.bin.asr_inference import Speech2Text
@@ -172,7 +176,7 @@ class App:
 
 
     def generate_image(self, prompt: str, lang: str, timestamp: str, transcription: str):
-        image = painter(prompt=prompt + ", sharp focus, soft lighting", num_inference_steps=25 ).images[0]
+        image = painter(prompt=prompt + ", highly detailed, cinematic lighting, vibrant colors, crisp edges", num_inference_steps=25, negative_prompt="nude, naked").images[0]
         image_path = timestamp + ".png"
         image.save(image_path)
         self.loading_image = False
